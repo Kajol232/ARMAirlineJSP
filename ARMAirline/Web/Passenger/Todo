@@ -1,0 +1,26 @@
+Main page is the passenger page loads @ signup and login
+- change password
+-update record(email,address,mobile). password check
+-delete account. password check
+-get all booking details
+- create bookings.
+
+My home page body content
+- content
+- signup(check password, check email)
+ -login form(both user and Admin).
+
+- admin page
+-user page.
+
+login class
+- check successful login
+-login
+-change password<set default password of admin and usage to once)
+
+
+flight - aircraft, passenger list
+booking - flight and passenger
+
+once seat cap = 0 delete flight and set aircraft to false back.
+delete seat too
