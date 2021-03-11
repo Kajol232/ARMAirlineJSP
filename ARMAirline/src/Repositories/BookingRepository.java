@@ -34,19 +34,16 @@ public class BookingRepository implements BookingInterface {
         
         String ticketId = gen.genTicketId(seatNum, code, pass);
         try {
-            preparedStatement = con.prepareStatement("insert into booking (ticket_id, passenger_id, passenger_name," +
-                    " flight_type, flight_class,destination,departure, date,time, payment) values (?,?,?,?,?,?,?,?,?,?)");
+            preparedStatement = con.prepareStatement("insert into booking (ticket_id,flightId, passenger_id, passenger_name," +
+                    " flight_type, flight_class, payment) values (?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1,ticketId);
-            preparedStatement.setString(2, pass);
-            preparedStatement.setString(3,passenger.getName());
-            preparedStatement.setString(4,typeOfFlight);
-            preparedStatement.setString(5, classOfFlight);
-            preparedStatement.setString(6, flight.getDestination());
-            preparedStatement.setString(7, flight.getDeparture());
-            preparedStatement.setString(8,flight.getDate());
-            preparedStatement.setString(9, String.valueOf(flight.getDepartureTime()));
-            preparedStatement.setInt(10,(int) payment);
+            preparedStatement.setString(2,code);
+            preparedStatement.setString(3, pass);
+            preparedStatement.setString(4,passenger.getName());
+            preparedStatement.setString(5,typeOfFlight);
+            preparedStatement.setString(6, classOfFlight);
+            preparedStatement.setInt(7,(int) payment);
 
             int count = preparedStatement.executeUpdate();
 
@@ -71,18 +68,27 @@ public class BookingRepository implements BookingInterface {
     }
 
     @Override
-    public boolean updateBooking(Booking booking, String passId) {
+    public String updateBooking(Booking booking, String passId,String seatNum) {
+        String tid = booking.getTicketId();
+        Flight f = booking.getFlight();
+        Aircraft a  = f.getAircraft();
+        String code = a.getModel();
+
+
+        String ticketId = gen.genTicketId(seatNum, code, passId);
         try {
             preparedStatement = con.prepareStatement("update booking set ticket_id = ?, " +
-                    "flight_type =?,flight_class =? where  passenger_Id =?");
-            preparedStatement.setString(1, booking.getTicketId());
+                    "flight_type =?,flight_class =?,payment=? where  passenger_Id =? AND  ticket_id =?");
+            preparedStatement.setString(1, ticketId);
             preparedStatement.setString(2, booking.getTypeOfFlight());
-            preparedStatement.setString(2, booking.getClassOfFlight());
-            preparedStatement.setString(4, passId);
+            preparedStatement.setString(3, booking.getClassOfFlight());
+            preparedStatement.setDouble(4,booking.getPrice());
+            preparedStatement.setString(5, passId);
+            preparedStatement.setString(6,tid);
             int count = preparedStatement.executeUpdate();
 
             if (count > 0){
-                return true;
+                return ticketId;
             }
 
         } catch (SQLException e) {
@@ -94,7 +100,7 @@ public class BookingRepository implements BookingInterface {
                 e.printStackTrace();
             }
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -123,8 +129,6 @@ public class BookingRepository implements BookingInterface {
 
     @Override
     public Booking getBookingById(String ticketId) {
-        String flightId = ticketId.substring(0, 7);
-        Flight flight = flightRepository.getFlightByCode(flightId);
         try {
             preparedStatement = con.prepareStatement("select  * from booking where " +
                     "ticket_Id = ?");
@@ -132,14 +136,17 @@ public class BookingRepository implements BookingInterface {
             rs = preparedStatement.executeQuery();
 
             while(rs.next()){
-                String passId = rs.getString(2);
-                String type= rs.getString(4);
-                String classes = rs.getString(5);
+                String fid = rs.getString(2);
+                String passId = rs.getString(3);
+                String type= rs.getString(5);
+                String classes = rs.getString(6);
+                double pay = rs.getDouble(7);
 
                 Passenger passenger = passengerRepository.getPassengerById(passId);
+                Flight flight = flightRepository.getFlightByCode(fid);
 
 
-                return new Booking(ticketId, passenger, flight,type, classes);
+                return new Booking(ticketId, passenger, flight,type, classes,pay);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -159,21 +166,23 @@ public class BookingRepository implements BookingInterface {
     public List<Booking> searchBooking(String query) {
         try {
             preparedStatement = con.prepareStatement("select * from booking where? " +
-                    "in(ticket_Id, passenger_Id, passenger_name, destination, departure, date, time)");
+                    "in(ticket_Id,flightId, passenger_Id, passenger_name)");
             preparedStatement.setString(1, query);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String ticketId = rs.getString(1);
-                String passId = rs.getString(2);
-                String type= rs.getString(4);
-                String classes = rs.getString(5);
+                String fId = rs.getString(2);
+                String passId = rs.getString(3);
+                String type= rs.getString(5);
+                String classes = rs.getString(6);
+                double pay = rs.getDouble(7);
 
-                String flightId = ticketId.substring(0, 7);
-                Flight flight = flightRepository.getFlightByCode(flightId);
+
+                Flight flight = flightRepository.getFlightByCode(fId);
 
                 Passenger passenger = passengerRepository.getPassengerById(passId);
 
-              Booking booking = new Booking(ticketId,passenger,flight,type,classes);
+              Booking booking = new Booking(ticketId,passenger,flight,type,classes,pay);
               bookingList.add(booking);
             }
         } catch (SQLException e) {
@@ -181,6 +190,60 @@ public class BookingRepository implements BookingInterface {
         }
         return bookingList;
     }
+
+    @Override
+    public List<Booking> getPassengerBookingLists(String id) {
+        try {
+            preparedStatement = con.prepareStatement("select * from booking where passenger_id =?");
+            preparedStatement.setString(1, id);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String ticketId = rs.getString(1);
+                String fId = rs.getString(2);
+                String type= rs.getString(5);
+                String classes = rs.getString(6);
+                double pay = rs.getDouble(7);
+
+                Flight flight = flightRepository.getFlightByCode(fId);
+
+                Passenger passenger = passengerRepository.getPassengerById(id);
+
+                Booking booking = new Booking(ticketId,passenger,flight,type,classes,pay);
+                bookingList.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingList;
+    }
+
+    @Override
+    public List<Booking> getFlightBookingLists(String fId) {
+        try {
+            preparedStatement = con.prepareStatement("select * from booking where flightId =?");
+            preparedStatement.setString(1, fId);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                String ticketId = rs.getString(1);
+                String id = rs.getString(3);
+                String type= rs.getString(5);
+                String classes = rs.getString(6);
+                double pay = rs.getDouble(7);
+
+                Flight flight = flightRepository.getFlightByCode(fId);
+
+                Passenger passenger = passengerRepository.getPassengerById(id);
+
+                Booking booking = new Booking(ticketId,passenger,flight,type,classes,pay);
+                bookingList.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingList;
+    }
+
+
 
 
 }

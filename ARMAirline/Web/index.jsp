@@ -1,4 +1,5 @@
-<%--
+<%@ page import="Repositories.PassengerRepository" %>
+<%@ page import="Repositories.LogInRepository" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 10/29/2020
@@ -16,145 +17,149 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="images/icon.JPG" type="images/x-icon">
-    <link rel="stylesheet" type="text/css" href="CSS/app.css">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 
-    <title>Home ARMAirline</title>
+    <title>HomePage ARMAirline</title>
   </head>
-  <body class="bg-image">
-  <div >
-      <nav class="navbar responsive" id="myNavbar">
-    <div class="container">
-      <div>
-      <a class = "" href="#">
-        <img  class="logo-img" src="images/homeLogo.JPG" alt="home logo" title="home-logo" ></a>
-      <span class=""> ARMAirline International<sub><i>....Satisfaction at its peak.......</i></sub></span>
-      </div>
+  <body class="body_container">
 
-      <div class="" id="">
-        <ul>
-          <li>
-            <a href = "index.jsp" class="">Home</a>
-          </li>
-          <li>
-            <a href="Passenger/create.jsp">Register</a>
-          </li>
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">
-                About Us<i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <a href="#">Vision & Mission</a>
-                <a href="#contact us">Contact Us</a>
+  <div class = "nav_container" id = "myNavbar">
+    <nav class="navbar">
+      <a href="index.jsp">
+        <img class="logo_img" src="images/homeLogo.JPG" alt="Homepage logo"/>
+      </a><span><sub><em>Satisfaction at its peak!!!!</em></sub></span>
+
+      <ul>
+        <li><a href="index.jsp">Home</a></li>
+
+        <li><a href="Passenger/create.jsp">Register</a></li>
+
+        <li><a href="Admin/LogIn.jsp">Admin logIn</a></li>
+
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">About Us</button>
+            <div class="dropdown-content">
+              <a>Vission & Mission</a>
+              <a>Contact Us</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+  </div>
+
+  <div>
+
+    <div class="main_container">
+      <div class="centerElement" style="vertical-align: middle"> <header class="header">Log In</header></div>
+      <div class="mainBoard">
+          <div class="form_container">
+            <form action="Passenger/index.jsp" method="get">
+            <div class="row">
+              <div class="col-25">
+                <label for="email">Email:</label>
+              </div>
+
+              <div class="col-75">
+                <input type="email" placeholder="Email here" name="email" id="email" required/>
               </div>
             </div>
-          </li>
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">
-                Manage Aircraft<i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <a href="Aircraft/create.jsp">New Aircraft</a>
-                <a href="Aircraft/list.jsp">Edit Aircraft</a>
-                <a href="Aircraft/list.jsp">Delete Aircraft</a>
-                <a href="Aircraft/list.jsp">Aircraft Lists</a>
+
+            <div class="row">
+              <div class="col-25">
+                <label for="password">Password:</label>
+              </div>
+
+              <div class="col-75">
+                <input type="password" placeholder="Password" name="password" id="password" required />
               </div>
             </div>
-          </li>
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">
-                Manage Flight<i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <a href="Flight/create.jsp">New Flight</a>
-                <a href="Flight/edit.jsp">Edit Flight</a>
-                <a href="Flight/remove.jsp">Delete Flight</a>
-                <a href="Flight/list.jsp">Flight List</a>
-                <a href="Flight/search.jsp">Search Flight</a>
+
+            <div class="centerElement">
+              <div class="col1">
+                <input type="submit" name="signIn" value="SignIn"/>
+              </div>
+              <div class="col2">
+                <span><a href="Passenger/create.jsp">Forgot password</a> </span>
               </div>
             </div>
-          </li>
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">
-                Manage Booking<i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                <a href="Flight/search.jsp">Book Flight</a>
-                <a href="Booking/edit.jsp">Edit Booking</a>
-                <a href="Booking/remove.jsp">Delete Booking</a>
-                <a href="Booking/list.jsp">Booking List</a>
-                <a href="Booking/search.jsp">Search Booking</a>
-              </div>
-            </div>
-          </li>
-          <li>
-            <a href = "#" class="">Log In</a>
-          </li>
+          </form>
+          </div>
+        </div>
 
+      <div class="clear"></div>
 
-        </ul>
-
-      </div>
     </div>
-  </nav>
+
+    <div class="footer_container">
+      <div class="contact_us"><p>Contact US</p></div>
+
+      <footer class="footer_distributed">
+        <div class="footer_left">
+          <h3>ARMAirline <span><img src="images/icon.JPG"></span></h3>
+          <p class="footer_links">
+            <a href="index.jsp" class="link_1">Home</a>
+            <a href="#">Blog</a>
+            <a href="#">About</a>
+            <a href="#">Faq</a>
+            <a href="#">Contact</a>
+          </p>
+
+          <p class="footer_company_name">ARMAirline &copy 2020</p>
+        </div>
+
+        <div class="footer_center">
+          <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>35 Ikeja-way, Ikeja</span>Lagos State,Nigeria</p>
+          </div>
+          <div>
+            <i class="fa fa-phone"></i>
+            <p>+234 08164553227</p>
+          </div>
+          <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:ridamot123@gmai.com">support@armairline.com</a></p>
+          </div>
+        </div>
+        <div class="footer_right" id="About us">
+          <p class="footer_company_about">
+            <span><u>About Us</u></span><br>
+            ARMAirline is one of the many judiciary of Kajol enterprise<br>
+            <span><u>Vision & Mission</u></span><br>
+          </p>
+
+          <div class="footer_icons">
+
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-github"></i></a>
+
+          </div>
+        </div>
+      </footer>
+
     </div>
-  <div class = "mainBody">
-    <div class="column1">column 1</div>
-    <div class="column2">column 2</div>
 
   </div>
-  <div class="foot">
-    <section class="section" id="contact us">Contact Us </section>
-    <footer class="footer-distributed">
-      <div class="footer-left">
-        <h3>ARMAirline<span><img src="images/icon.JPG"></span></h3>
-
-        <p class="footer-links">
-          <a href="index.jsp" class="link-1">Home</a>
-          <a href="#">Blog</a>
-          <a href="#">Book Flight</a>
-          <a href="#">About</a>
-          <a href="#">Faq</a>
-          <a href="#contact us">Contact</a>
-        </p>
-
-        <p class="footer-company-name">ARMAirline &copy 2020</p>
-      </div>
-
-      <div class="footer-center">
-        <div>
-          <i class="fa fa-map-marker"></i>
-          <p><span>35 Ikeja-way, Ikeja</span>Lagos State,Nigeria</p>
-        </div>
-        <div>
-          <i class="fa fa-phone"></i>
-          <p>+234 08164553227</p>
-        </div>
-        <div>
-          <i class="fa fa-envelope"></i>
-          <p><a href="maito:ridamot123@gmai.com">support@armairline.com</a></p>
-        </div>
-      </div>
-      <div class="footer-right" id="About us">
-        <p class="footer-company-about">
-          <span>About Us</span>
-          ARMAirline is one of the many judiciary of Kajol enterprise
-        </p>
-
-        <div class="footer-icons">
-
-          <a href="#"><i class="fa fa-facebook"></i></a>
-          <a href="#"><i class="fa fa-twitter"></i></a>
-          <a href="#"><i class="fa fa-linkedin"></i></a>
-          <a href="#"><i class="fa fa-github"></i></a>
-
-        </div>
-      </div>
-    </footer>
-  </div>
-  <script src = "js/aircraft.js"></script>
   </body>
 </html>
+
+<%
+    if (request.getMethod().equalsIgnoreCase("get")){
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String type = "user";
+        LogInRepository logInRepository = new LogInRepository();
+        boolean log = logInRepository.logIn(email,password,type);
+        if (log){
+            out.println("Login Successful");
+            response.sendRedirect("Passenger/index.jsp");
+        }else{
+            out.println("Invalid login details");
+        }
+    }
+%>

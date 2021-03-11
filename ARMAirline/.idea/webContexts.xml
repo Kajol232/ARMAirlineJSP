@@ -8,8 +8,11 @@
         <entry key="file://$PROJECT_DIR$/Web/Aircraft/list.jsp" value="file://$PROJECT_DIR$/Web/Aircraft" />
         <entry key="file://$PROJECT_DIR$/Web/Aircraft/remove.jsp" value="file://$PROJECT_DIR$/Web/Aircraft" />
         <entry key="file://$PROJECT_DIR$/Web/Booking/confirmation page.jsp" value="file://$PROJECT_DIR$/Web/Booking" />
+        <entry key="file://$PROJECT_DIR$/Web/Booking/create.jsp" value="file://$PROJECT_DIR$/Web/Booking" />
         <entry key="file://$PROJECT_DIR$/Web/Flight/create.jsp" value="file://$PROJECT_DIR$/Web/Flight" />
         <entry key="file://$PROJECT_DIR$/Web/Flight/edit.jsp" value="file://$PROJECT_DIR$/Web/Flight" />
+        <entry key="file://$PROJECT_DIR$/Web/Flight/remove.jsp" value="file://$PROJECT_DIR$/Web/Flight" />
+        <entry key="file://$PROJECT_DIR$/Web/Passenger/index.jsp" value="file://$PROJECT_DIR$/Web/Passenger" />
         <entry key="file://$PROJECT_DIR$/Web/index.jsp" value="file://$PROJECT_DIR$/Web" />
       </map>
     </option>

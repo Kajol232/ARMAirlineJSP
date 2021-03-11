@@ -15,61 +15,75 @@
     <meta name = "author" content="Muhammad AmotulRahman O.">
 
     <link rel="shortcut icon" href="../images/icon.JPG" type="images/x-icon">
-    <link rel="stylesheet" type="text/css" href="../CSS/app.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/aircraft.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <title>Edit Aircraft</title>
 </head>
-<body class ="bg-image">
-<div>
-<nav class="navbar" id = "myNavbar">
-    <div class="container">
-        <a class = "" href="../index.jsp">
-            <img  class="logo-img" src="../images/homeLogo.JPG" alt="home logo" title="home-logo" > </a>
-        <button class="" type="button" data-toggle="collapse" data-target ="#navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""></span>
-        </button>
+<body class ="body_container">
+<div class="nav_container">
+    <nav class="navbar">
+        <a href="../index.jsp">
+            <img  class="logo-img" src="../images/homeLogo.JPG" alt="home logo" title="home-logo" ></a>
 
 
-        <div class="" id="">
-            <ul>
-                <li>
-                    <a href = "../index.jsp">Home</a>
-                </li>
-                <li>
-                    <a href="#">Register</a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            About Us<i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="#">Vision & Mission</a>
-                            <a href="#">Contact Us</a>
-                        </div>
+
+        <ul>
+            <li><a href="../Admin/AdminIndex.jsp">Home</a></li>
+
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">About Us</button>
+                    <div class="dropdown-content">
+                        <a>Vission & Mission</a>
+                        <a>Contact Us</a>
                     </div>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            Manage Aircraft<i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="create.jsp">New Aircraft</a>
-                            <a href="edit.jsp">Edit Aircraft</a>
-                            <a href="remove.jsp">Delete Aircraft</a>
-                            <a href="list.jsp">Aircraft Lists</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+                </div>
+            </li>
 
-</nav>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Manage Aircraft</button>
+                    <div class="dropdown-content">
+                        <a href="create.jsp">Create Aircraft</a>
+                        <a href="list.jsp">UpdateAircraft</a>
+                        <a href="list.jsp">Delete Aircraft</a>
+                        <a href="list.jsp">Aircraft List</a>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Manage Flight</button>
+                    <div class="dropdown-content">
+                        <a href="../Flight/create.jsp">Create Flight</a>
+                        <a href="../Flight/list.jsp">Update Flight</a>
+                        <a href="../Flight/list.jsp">Delete Flight</a>
+                        <a href="../Flight/list.jsp">Flight List</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Manage Booking</button>
+                    <div class="dropdown-content">
+                        <a href="../Booking/edit.jsp">Update Booking</a>
+                        <a href="../Booking/remve.jsp">Delete Booking</a>
+                        <a href="../Flight/list.jsp">Booking Lists</a>
+                    </div>
+                </div>
+            </li>
+            <li><a href="../Admin/LogOff.jsp">Log Off</a></li>
+
+        </ul>
+
+    </nav>
 </div>
-<div class = "mainBody">
+<div class="centerElement" style="vertical-align: middle">
+    <header class="header">Edit Details</header>
+</div>
+
+<div class = "main_container">
 
 
             <%
@@ -82,55 +96,67 @@
                         out.println("Aircraft does not exist");
                     }else{
             %>
-
-            <form class="form-container" method="post">
-                <div>
-                    <label >Edit Details</label>
-                </div>
-                <div>
-                    <div>
-                        <label>Model:</label>
-                        <input type="text" name="a_model" value="<%=aircraft.getModel()%>" readonly/>
+    <div class="mainBoard">
+        <div class="form_container">
+            <form method="post">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="model">Model:</label>
                     </div>
-                    <div>
-                        <label>Aircraft Name:</label>
-                        <input type="text" name="a_name" value="<%=aircraft.getName()%>"/>
-                    </div>
-                    <div>
-                        <label>Aircraft Capacity:</label>
-                        <input type="text" name="a_cap" value="<%=aircraft.getCapacity()%>"/>
-                    </div>
-                    <div>
-                        <label>Status:</label>
-                        <input type="text" name="s" value="<%=aircraft.getStatus()%>"/>
+                    <div class="col-75">
+                        <input type="text" name="a_model" id="model" value="<%=aircraft.getModel()%>" readonly/>
                     </div>
                 </div>
-                <div class="centerbtn">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name">Aircraft Name:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="a_name"  id="name" value="<%=aircraft.getName()%>"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="cap">Aircraft Capacity:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="a_cap" id="cap" value="<%=aircraft.getCapacity()%>"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="s">Status:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" name="s" id="s" value="<%=aircraft.getStatus()%>"/>
+                    </div>
+                </div>
+                <div class="centerElement">
                     <button type="submit" >Edit</button>
                 </div>
             </form>
             <%}}%>
-   <div> <p><a href="../index.jsp">Go back to Home Page</a> </p></div>
+        </div>
     </div>
-<div class="foot">
-    <section class="section" id="contact us">Contact Us </section>
-    <footer class="footer-distributed">
-        <div class="footer-left">
-            <h3>ARMAirline<span><img src="../images/icon.JPG"></span></h3>
+    </div>
+<div class="footer_container">
+    <div class="contact_us"><p>Contact US</p></div>
 
-            <p class="footer-links">
-                <a href="index.jsp" class="link-1">Home</a>
+    <footer class="footer_distributed">
+        <div class="footer_left">
+            <h3>ARMAirline <span><img src="../images/icon.JPG"></span></h3>
+            <p class="footer_links">
+                <a href="../index.jsp" class="link_1">Home</a>
                 <a href="#">Blog</a>
-                <a href="#">Book Flight</a>
                 <a href="#">About</a>
                 <a href="#">Faq</a>
                 <a href="#contact us">Contact</a>
             </p>
 
-            <p class="footer-company-name">ARMAirline &copy 2020</p>
+            <p class="footer_company_name">ARMAirline &copy 2020</p>
         </div>
 
-        <div class="footer-center">
+        <div class="footer_center">
             <div>
                 <i class="fa fa-map-marker"></i>
                 <p><span>35 Ikeja-way, Ikeja</span>Lagos State,Nigeria</p>
@@ -141,16 +167,17 @@
             </div>
             <div>
                 <i class="fa fa-envelope"></i>
-                <p><a href="maito:ridamot123@gmai.com">support@armairline.com</a></p>
+                <p><a href="mailto:ridamot123@gmai.com">support@armairline.com</a></p>
             </div>
         </div>
-        <div class="footer-right" id="About us">
-            <p class="footer-company-about">
-                <span>About Us</span>
-                ARMAirline is one of the many judiciary of Kajol enterprise
+        <div class="footer_right" id="About us">
+            <p class="footer_company_about">
+                <span><u>About Us</u></span><br>
+                ARMAirline is one of the many judiciary of Kajol enterprise<br>
+                <span><u>Vision & Mission</u></span><br>
             </p>
 
-            <div class="footer-icons">
+            <div class="footer_icons">
 
                 <a href="#"><i class="fa fa-facebook"></i></a>
                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -160,6 +187,7 @@
             </div>
         </div>
     </footer>
+
 </div>
 </body>
 </html>

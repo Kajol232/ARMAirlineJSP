@@ -1,4 +1,9 @@
-<%--
+<%@ page import="Repositories.LogInRepository" %>
+<%@ page import="model.Passenger" %>
+<%@ page import="Repositories.FlightRepository" %>
+<%@ page import="model.Flight" %>
+<%@ page import="model.Aircraft" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 11/6/2020
@@ -8,162 +13,198 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home User</title>
+    <meta charset="utf-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1, shrink-to-fit = no">
+    <meta name = "author" content="Muhammad AmotulRahman O.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="../images/icon.JPG" type="images/x-icon">
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+
+    <title>UserHome ARMAIRLINE</title>
 </head>
-<body>
-<div id="frame">
-    <div id="page">
-        <div id="header">
-            <a class = "" href="#">
-                <img  class="logo-img" src="images/homeLogo.JPG" alt="home logo" title="home-logo" >
-            </a>
-            <span class=""> ARMAirline International<sub>....Satisfaction at its peak.......</sub></span>
-        </div>
-        <div id="navigation">
-            <ul>
-                <li>
-                    <a href = "index.jsp" class="">Home</a>
-                </li>
-                <li>
-                    <a href="Passenger/create.jsp">Register</a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            About Us<i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="#">Vision & Mission</a>
-                            <a href="#contact us">Contact Us</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            Manage Aircraft<i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="Aircraft/create.jsp">New Aircraft</a>
-                            <a href="Aircraft/edit.jsp">Edit Aircraft</a>
-                            <a href="Aircraft/remove.jsp">Delete Aircraft</a>
-                            <a href="Aircraft/list.jsp">Aircraft Lists</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            Manage Flight<i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="Flight/create.jsp">New Flight</a>
-                            <a href="Flight/edit.jsp">Edit Flight</a>
-                            <a href="Flight/remove.jsp">Delete Flight</a>
-                            <a href="Flight/list.jsp">Flight List</a>
-                            <a href="Flight/search.jsp">Search Flight</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                            Manage Booking<i class="fa fa-caret-down"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="Flight/search.jsp">Book Flight</a>
-                            <a href="Booking/edit.jsp">Edit Booking</a>
-                            <a href="Booking/remove.jsp">Delete Booking</a>
-                            <a href="Booking/list.jsp">Booking List</a>
-                            <a href="Booking/search.jsp">Search Booking</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href = "#" class="">Log In</a>
-                </li>
+<body class="body_container">
 
+<div class="nav_container" id="myNavbar">
+    <nav class="navbar">
+        <a href="index.jsp">
+            <img class="logo_img" src="../images/homeLogo.JPG" alt="Homepage logo"/>
+        </a><span><sup><em>Satisfaction at its peak!!!!</em></sup></span>
 
-            </ul>
-        </div>
-        <div class=”column1of2”>
-            <p>
-                Here you can see the code that generates a page with three columns that is similar to this structure
-                ( ch09_eg04.html ). Note how the values for the class attributes on the columns indicate how many
-                columns the page is divided into and which column is which. For example, the first column has a value
-                of column1of3 :Here you can see the code that generates a page with three columns that is similar to this structure
-                ( ch09_eg04.html ). Note how the values for the class attributes on the columns indicate how many
-                columns the page is divided into and which column is which. For example, the first column has a value
-                of column1of3 :Here you can see the code that generates a page with three columns that is similar to this structure
-                ( ch09_eg04.html ). Note how the values for the class attributes on the columns indicate how many
-                columns the page is divided into and which column is which. For example, the first column has a value
-                of column1of3 :
-            </p>
-        </div>
-        <div class=”column2of2”>
-            <p>
-                Here you can see the code that generates a page with three columns that is similar to this structure
-                ( ch09_eg04.html ). Note how the values for the class attributes on the columns indicate how many
-                columns the page is divided into and which column is which. For example, the first column has a value
-                of column1of3 :Here you can see the code that generates a page with three columns that is similar to this structure
-                ( ch09_eg04.html ). Note how the values for the class attributes on the columns indicate how many
-                columns the page is divided into and which column is which. For example, the first column has a value
-                of column1of3 :Here you can see the code that generates a page with three columns that is similar to this structure
-                ( ch09_eg04.html ). Note how the values for the class attributes on the columns indicate how many
-                columns the page is divided into and which column is which. For example, the first column has a value
-                of column1of3 :
-            </p>
-        </div>
-        <div id="footer">
-            <footer class="footer-distributed">
-                <div class="footer-left">
-                    <h3>ARMAirline<span><img src="images/icon.JPG"></span></h3>
+        <ul>
+            <li><a href="index.jsp">Home</a></li>
 
-                    <p class="footer-links">
-                        <a href="index.jsp" class="link-1">Home</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Book Flight</a>
-                        <a href="#">About</a>
-                        <a href="#">Faq</a>
-                        <a href="#contact us">Contact</a>
-                    </p>
+            <li><a href="ChangePassword.jsp">Password Change</a></li>
 
-                    <p class="footer-company-name">ARMAirline &copy 2020</p>
-                </div>
-
-                <div class="footer-center">
-                    <div>
-                        <i class="fa fa-map-marker"></i>
-                        <p><span>35 Ikeja-way, Ikeja</span>Lagos State,Nigeria</p>
-                    </div>
-                    <div>
-                        <i class="fa fa-phone"></i>
-                        <p>+234 08164553227</p>
-                    </div>
-                    <div>
-                        <i class="fa fa-envelope"></i>
-                        <p><a href="maito:ridamot123@gmai.com">support@armairline.com</a></p>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Manage Account</button>
+                    <div class="dropdown-content">
+                        <a href="edit.jsp">Update record</a>
+                        <a href="remove.jsp">Delete Account</a>
                     </div>
                 </div>
-                <div class="footer-right" id="About us">
-                    <p class="footer-company-about">
-                        <span>About Us</span>
-                        ARMAirline is one of the many judiciary of Kajol enterprise
-                    </p>
-
-                    <div class="footer-icons">
-
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-github"></i></a>
-
+            </li>
+            <li>
+                <div class="dropdown">
+                    <button class="dropbtn">Manage Booking</button>
+                    <div class="dropdown-content">
+                        <a href="../Booking/edit.jsp">Update Booking</a>
+                        <a href="../Booking/remve.jsp">Delete Booking</a>
+                        <a href="BookingList.jsp">Booking List</a>
                     </div>
                 </div>
-            </footer>
+            </li>
+            <li><a href="Logoff.jsp">Log Off</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<div class="centerElement" style="vertical-align: middle"> <header class="header">Search Flight</header></div>
+
+<div class="main_container">
+    <div class="col1">
+    <div class="form_container">
+        <form method="get">
+            <div class="row">
+                <div class="col-25">
+                    <label for="dept">Departure Port:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" placeholder="Departure point here" name="dept" id="dept" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="dest">Destination Port:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" placeholder="Destination point here" name="dest" id="dest" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="date">Departure Date:</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" placeholder="Departure Date here" name="date" id="date" required/>
+                </div>
+            </div>
+            <div class="centerElement">
+                <input type="submit" name="search" value="Search"/>
+            </div>
+        </form>
+    </div></div>
+    <div class="col2">
+        <div class="centerElement" style="vertical-align: middle"> <header class="header">Results</header></div>
+
+        <div class="form_container">
+            <table>
+                <tr>
+                    <th>Select</th>
+                    <th>Model</th>
+                    <th>Departure</th>
+                    <th>Destination</th>
+                    <th>Departure Time</th>
+                    <th>Departure Date</th>
+                    <th>Price</th>
+                </tr>
+                <%
+                    FlightRepository flightRepository = new FlightRepository();
+                    if (request.getMethod().equalsIgnoreCase("GET")){
+                        String departure = request.getParameter("dept");
+                        String destination = request.getParameter("dest");
+                        String date = String.valueOf(request.getParameter("date"));
+                        List<Flight> flightList = flightRepository.getAvailableFlight(destination,departure,date);
+                        if (flightList != null){
+                            for (Flight f : flightList ) {
+                                Aircraft aircraft = f.getAircraft();
+                %>
+                <form ACTION="../Booking/create.jsp" method="get">
+                    <div>
+                        <div>
+                            <tr>
+                                <td><input type="radio" name = "fId" value = "<%=aircraft.getModel()%>"/> </td>
+                                <td><%=aircraft.getModel()%></td>
+                                <td><%=f.getDeparture()%></td>
+                                <td><%=f.getDestination()%></td>
+                                <td><%=f.getDepartureTime()%></td>
+                                <td><%=f.getDate()%></td>
+                                <td><%=f.getPrice()%></td>
+                            </tr>
+                        </div>
+                    </div>
+                    <%}}else{
+                        out.println("No Available flight from "+ destination + " to" + departure + " on" + date);
+                    }}%>
+                    <div>
+                        <tr>
+                            <td colspan="4">
+                                <input type="submit" value="Book"/>
+                            </td>
+                        </tr>
+                    </div>
+                </form>
+
+
+            </table>
         </div>
     </div>
 </div>
+
+<div class="footer_container">
+    <div class="contact_us"><p>Contact US</p></div>
+
+    <footer class="footer_distributed">
+        <div class="footer_left">
+            <h3>ARMAirline <span><img src="../images/icon.JPG"></span></h3>
+            <p class="footer_links">
+                <a href="index.jsp" class="link_1">Home</a>
+                <a href="#">Blog</a>
+                <a href="#">About</a>
+                <a href="#">Faq</a>
+                <a href="#">Contact</a>
+            </p>
+
+            <p class="footer_company_name">ARMAirline &copy 2020</p>
+        </div>
+
+        <div class="footer_center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>35 Ikeja-way, Ikeja</span>Lagos State,Nigeria</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+234 08164553227</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:ridamot123@gmai.com">support@armairline.com</a></p>
+            </div>
+        </div>
+        <div class="footer_right" id="About us">
+            <p class="footer_company_about">
+                <span><u>About Us</u></span><br>
+                ARMAirline is one of the many judiciary of Kajol enterprise<br>
+                <span><u>Vision & Mission</u></span><br>
+            </p>
+
+            <div class="footer_icons">
+
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+
+            </div>
+        </div>
+    </footer>
+
+</div>
+
 </body>
 
 </html>

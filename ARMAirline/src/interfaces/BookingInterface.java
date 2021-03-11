@@ -11,10 +11,12 @@ public interface BookingInterface {
     String createNewBooking(String seatNum, Passenger passenger, Flight flight, String typeOfFlight,
                              String classOfFlight,double payment);
 
-    boolean updateBooking(Booking booking, String passId);
+    String updateBooking(Booking booking, String passId,String seatNum);
 
     boolean deleteBooking(String ticketId);
     Booking getBookingById(String ticketId);
     List<Booking> searchBooking(String query);
+    List<Booking>getPassengerBookingLists(String id);
+    List<Booking>getFlightBookingLists(String fId);
 
 }

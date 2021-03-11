@@ -18,61 +18,73 @@
     <meta name = "viewport" content = "width = device-width, initial-scale = 1, shrink-to-fit = no">
     <meta name = "author" content="Muhammad AmotulRahman O.">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="shortcut icon" href="../images/icon.JPG" type="images/x-icon">
-    <link rel="stylesheet" type="text/css" href="../CSS/app.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/aircraft.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <title>Edit Flight</title>
 </head>
-<body class="bg-image">
+<body class="body_container">
 <div>
-    <div><nav class="navbar" id = "myNavbar">
-        <div class="container">
-            <a class = "" href="../index.jsp">
-                <img  class="logo-img" src="../images/homeLogo.JPG" alt="home logo" title="home-logo" > </a>
-            <button class="" type="button" data-toggle="collapse" data-target ="#navbarResponsive"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class=""></span>
-            </button>
+    <div class = "nav_container" id = "myNavbar">
+        <nav class="navbar">
+            <a href="../index.jsp">
+                <img class="logo_img" src="../images/homeLogo.JPG" alt="Homepage logo"/>
+            </a><span><sub><em>Satisfaction at its peak!!!!</em></sub></span>
 
+            <ul>
+                <li><a href="../Admin/AdminIndex.jsp">Home</a></li>
 
-            <div class="" id="">
-                <ul>
-                    <li>
-                        <a href = "../index.jsp">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Register</a>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">
-                                About Us<i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#">Vision & Mission</a>
-                                <a href="#">Contact Us</a>
-                            </div>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">About Us</button>
+                        <div class="dropdown-content">
+                            <a>Vission & Mission</a>
+                            <a>Contact Us</a>
                         </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button class="dropbtn">
-                                Manage Aircraft<i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="../Aircraft/create.jsp">New Aircraft</a>
-                                <a href="../Aircraft/list.jsp">Edit Aircraft</a>
-                                <a href="../Aircraft/list.jsp">Delete Aircraft</a>
-                                <a href="../Aircraft/list.jsp">Aircraft Lists</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+                    </div>
+                </li>
 
-    </nav></div>
-    <div class="mainBody">
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Manage Aircraft</button>
+                        <div class="dropdown-content">
+                            <a href="../Aircraft/create.jsp">Create Aircraft</a>
+                            <a href="../Aircraft/list.jsp">UpdateAircraft</a>
+                            <a href="../Aircraft/list.jsp">Delete Aircraft</a>
+                            <a href="../Aircraft/list.jsp">Aircraft List</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Manage Flight</button>
+                        <div class="dropdown-content">
+                            <a href="../Flight/create.jsp">Create Flight</a>
+                            <a href="../Flight/list.jsp">Update Flight</a>
+                            <a href="../Flight/list.jsp">Delete Flight</a>
+                            <a href="../Flight/list.jsp">Flight List</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">Manage Booking</button>
+                        <div class="dropdown-content">
+                            <a href="../Booking/edit.jsp">Update Booking</a>
+                            <a href="../Booking/remve.jsp">Delete Booking</a>
+                            <a href="../Flight/list.jsp">Booking Lists</a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="../Admin/LogOff.jsp">Log Off</a></li>
+
+            </ul>
+
+        </nav>
+    </div>
+    <div class="main_container">
 
         <%
 
@@ -82,50 +94,80 @@
                Flight f = flightRepository.getFlightByCode(model);
 
                 if (f == null){
-                    out.println("Flight does not exist");
+                    out.println("");
                 }else{
                     Aircraft a = f.getAircraft();
         %>
-        <form method="post" class="form-container">
-            <div>
-                <div>
-                    <label>Model:</label>
-                    <input type="text" name="model" value="<%=a.getModel()%>" readonly/>
+        <div class="mainBoard">
+            <div class="form_container">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="model">Model:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="model" name="model" value="<%=a.getModel()%>" readonly/>
 
-                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="dpt">Departure:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="dpt" name="departure" value="<%=f.getDeparture()%>"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="dest">Destination:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="dest" name="destination" value="<%=f.getDestination()%>"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="dptTime">Departure Time:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="dptTime" name="departure_time" value="<%=f.getDepartureTime()%>" readonly/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="date">Date:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="date" name="date" value="<%=f.getDate()%>"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="cap">Flight Capacity:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="number" id="cap" name="seat" value="<%=f.getCapacity()%>" readonly/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="price">Price:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text"  id="price" name="price" value="<%=f.getPrice()%>"/>
+                        </div>
+                    </div>
 
-                <div>
-                    <label>Departure:</label>
-                    <input type="text" name="departure" value="<%=f.getDeparture()%>"/>
-                </div>
-                <div>
-                    <label>Destination:</label>
-                    <input type="text" name="destination" value="<%=f.getDestination()%>"/>
-                </div>
-                <div>
-                    <label>Departure Time:</label>
-                    <input type="text" name="departure_time" value="<%=f.getDepartureTime()%>" readonly/>
-                </div>
-                <div>
-                    <label>Date:</label>
-                    <input type="text" name="date" value="<%=f.getDate()%>"/>
-                </div>
-                <div>
-                    <label>Flight Capacity:</label>
-                    <input type="number" name="seat" value="<%=f.getCapacity()%>" readonly/>
-                </div>
-                <div>
-                    <label>Price:</label>
-                    <input type="text" name="price" value="<%=f.getPrice()%>"/>
-                </div>
+                        <div class="centerElement">
+                            <input type="submit" value="Edit"/>
 
-                <div>
-                <input type="submit" value="Edit"/>
-
+                        </div>
+                </form>
+                <%}}%>
             </div>
-            </div>
-        </form>
-    <%}}%>
+        </div>
+
 
 </div>
 </div>
